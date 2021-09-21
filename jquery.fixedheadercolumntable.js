@@ -5,26 +5,31 @@
 (function ($) {
   $.fn.fixedheadercolumntable = function (options) {
     var defaults = {
-      fixedColumnCount: 2,// if this is not be set, will not fix column
-      	    tableMaxHeight:    100,
-            tableMaxWidth:      200, //this will be work only when responsive is false.
-      fixedHeader: true, // when true,will auto get fixed header row count from table header trs.
-      adjustWHSettings : {
-      	   addLeftWidth:0,
-      	   addTopHeight:0
-      	   ,addRightTopWidth:0
-      	   ,addLeftBottomHeight:0
-      	   },
-          submitEreas : {leftTop:false,leftBottom:false,rightTop:false,rightBottom:true},
-          submitSelector : "a,input,select,textarea"
+      fixedColumnCount  : 0,// if this is not be set, will not fix column
+      tableMaxHeight    : 0,
+      tableMaxWidth     : 0, //this will be work only when responsive is false.
+      fixedHeader       : true, // when true,will auto get fixed header row count from table header trs.
+      adjustWHSettings  : {
+      	   addLeftWidth        :0,
+      	   addTopHeight        :0,
+      	   addRightTopWidth    :0,
+      	   addLeftBottomHeight :0
+      },
+      submitEreas       : {
+      	   leftTop      :false,
+      	   leftBottom   :false,
+      	   rightTop     :false,
+      	   rightBottom  :true
+       },
+      submitSelector    : "a,input,select,textarea"
     };
 
     var baseBigTableHtml =
       '<table class="alltbl" style="overflow:hidden;position:relative" cellspacing="0" cellpadding="0" border="0" >' +
-      '<tr><td class="leftTopTd"><div class="leftTopContainer container" style="overflow:hidden;position:relative"></div></td>' +
-      '<td class="rightTopTd"><div class="rightTopContainer container" style="overflow:hidden;position:relative"></div></td></tr>' +
-      '<tr><td valign="top"  class="leftBottomTd"><div class="leftBottomContainer container" style="position:relative;overflow: hidden;"></div></td>' +
-      '<td valign="top" class="rightBottomTd"><div class="rightBottomContainer container" style="overflow: auto;position:relative;height:auto"></div></td></tr></table>';
+      '<tr><td class="leftTopTd"><div class="leftTopContainer container" style="padding:0;overflow:hidden;position:relative"></div></td>' +
+      '<td class="rightTopTd"><div class="rightTopContainer container" style="padding:0;overflow:hidden;position:relative"></div></td></tr>' +
+      '<tr><td valign="top"  class="leftBottomTd"><div class="leftBottomContainer container" style="padding:0;position:relative;overflow: hidden;"></div></td>' +
+      '<td valign="top" class="rightBottomTd"><div class="rightBottomContainer container" style="padding:0;overflow: auto;position:relative;height:auto"></div></td></tr></table>';
 
     var settings = {};
 
@@ -33,19 +38,19 @@
       resize: function (options) {},
       init: function (options) {
         settings = $.extend({}, defaults, options);
-
-        // iterate through all the DOM elements we are attaching the plugin to
         this.each(function () {
           var $table = $(this); // reference the jQuery version of the current DOM element
+          $table.data("tableMaxHeight",settings.tableMaxHeight);
+          $table.data("tableMaxWidth",settings.tableMaxWidth);
+          $table.data("fixedColumnCount",settings.fixedColumnCount);
 
-          if (helperMethods._isValidTable($table) && helperMethods._canScroll($table)) {
-            // helperMethods.setup.apply(this, Array.prototype.slice.call(arguments, 1));
-            // $.isFunction(settings.create) && settings.create.call(this);
+          if (helperMethods._isValidTable($table)) {
+          	  if(!helperMethods._canScroll($table)){
+          	  	  return;
+          	  }
             helperMethods._resetSettings($table);
-
             var $allTbl = $(baseBigTableHtml);
-            //$allTbl.data("originalTable", $table.clone(true));
-            helperMethods._setFixedContainer($allTbl);
+            helperMethods._setFixedContainer($allTbl,$table);
 			helperMethods._setEreaMarkOfTable($table);
             helperMethods._fill($table, $allTbl);
 
@@ -71,17 +76,18 @@
 	        if(settings.tableMaxHeight >= th && settings.tableMaxWidth >= tw){
 	        	return false;
 	        }
-	        if (settings.tableMaxHeight > th)  {
-	          settings.tableMaxHeight = th;
+	        if (settings.tableMaxHeight > th || settings.tableMaxHeight <= 0)  {
+	           $table.data("tableMaxHeight",th);
 	        }
-	        if (settings.tableMaxWidth > tw)  settings.tableMaxWidth = tw;
-	        
+	        if (settings.tableMaxWidth > tw  || settings.tableMaxWidth <= 0) {
+	           $table.data("tableMaxWidth",tw);
+	        }
             return true;
     	 },
       _isValidTable: function ($table) {
         var hasTable = $table.is("table"),
-        hasThead = $table.find("thead").length > 0,
-        hasTbody = $table.find("tbody").length > 0;
+        hasThead = $table.find(">thead").length > 0,
+        hasTbody = $table.find(">tbody").length > 0;
 
         if (hasTable && hasThead && hasTbody) {
           return true;
@@ -95,7 +101,7 @@
               .find(">thead >tr:nth-child(1) > td").length : $table
               .find(">thead >tr:nth-child(1) > th").length;
         if(settings.fixedColumnCount > columnCount){
-        	settings.fixedColumnCount = 0;
+        	$table.data("fixedColumnCount",0);
         }
       },
        _getObj : function(objs) {
@@ -106,12 +112,12 @@
                 }
         },
        _setEreaMarkOfSelector : function($originalTable,selector,types) {
-       	    $originalTable.find('>thead>tr').each(
+       	    $originalTable.find(selector).each(
 	 		   function(){
 	 			  var tds = helperMethods._getObj([$(this).find(">td"),$(this).find(">th")]);
 	 			  tds.each(function(n) {
 	 			  	    if(types.length == 2){
-	 			  	     	 if(n < settings.fixedColumnCount){
+	 			  	     	 if(n < parseInt($originalTable.data("fixedColumnCount"))){
 	 			  	     	 	 $(this).addClass(types[0]);
 		 			  	     }else{
 		 			  	     	 $(this).addClass(types[1]);
@@ -123,15 +129,16 @@
 	 	     });
        },
       _setEreaMarkOfTable : function($originalTable) {
-	 		if (settings.fixType === "full") {
+      	    var fixType = helperMethods._getFixType($originalTable);
+	 		if (fixType === "full") {
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>thead>tr',["leftTop","rightTop"]);
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>tbody>tr',["leftBottom","rightBottom"]);
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>tfoot>tr',["leftBottom","rightBottom"]);
-	        } else if (settings.fixType === "topbottom") {
+	        } else if (fixType === "topbottom") {
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>thead>tr',["rightTop"]);
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>tbody>tr',["rightBottom"]);
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>tfoot>tr',["rightBottom"]);
-	        } else if (settings.fixType === "leftright") {
+	        } else if (fixType === "leftright") {
 				helperMethods._setEreaMarkOfSelector($originalTable,'>thead>tr',["leftBottom","rightBottom"]);
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>tbody>tr',["leftBottom","rightBottom"]);
 	 			helperMethods._setEreaMarkOfSelector($originalTable,'>tfoot>tr',["leftBottom","rightBottom"]);
@@ -142,8 +149,18 @@
 	        }
       },
   	 _setSubmitErea : function($allTbl) {
-          for(var prop in settings.submitEreas){
-             if(settings.submitEreas[prop] === false){
+  	 	  var ses    = {
+      	   leftTop      :false,
+      	   leftBottom   :false,
+      	   rightTop     :false,
+      	   rightBottom  :true
+          }
+  	 	  for(var key in settings.submitEreas){
+  	 	  	  ses[key] = settings.submitEreas[key];
+  	 	  }
+  	 	 
+          for(var prop in ses){
+             if(ses[prop] === false){
             	var container = $allTbl.find("."+ prop + "Container");
             	if(container.length > 0){
             		container.find(settings.submitSelector).attr('id', '').attr('name', '').addClass("")
@@ -164,16 +181,15 @@
 		       $lbt =  $allTbl.find(".leftBottomTd"), $ltt =  $allTbl.find(".leftTopTd"),
 		       $rbt =  $allTbl.find(".rightBottomTd"), $rtt =  $allTbl.find(".rightTopTd");
         		 
-      	   	   var lw = settings.adjustWHSettings.addLeftWidth;
-      	   	   var rtw = settings.adjustWHSettings.addRightTopWidth;
-      	   	   var lbh = settings.adjustWHSettings.addLeftBottomHeight;
-      	   	   var th = settings.adjustWHSettings.addTopHeight;
-      	   	   
+      	   	   var lw = settings.adjustWHSettings.addLeftWidth || 0;
+      	   	   var rtw = settings.adjustWHSettings.addRightTopWidth || 0;
+      	   	   var lbh = settings.adjustWHSettings.addLeftBottomHeight || 0;
+      	   	   var th = settings.adjustWHSettings.addTopHeight || 0;
       	   	   if(lw != 0){
       	   	   	  var lbw = parseInt($lbc.css("width"));
-      	   	   	  var rtw = parseInt($rtc.css("width"));
+      	   	   	  var _rtw = parseInt($rtc.css("width"));
                   var lpx = lbw + lw + 'px';
-                  var rtpx = rtw - lw + 'px';
+                  var rtpx = _rtw - lw + 'px';
       	   	   	  $lbc.css("width",lpx);
       	   	   	  $lbt.css("width",lpx );
       	   	   	  $ltc.css("width",lpx);
@@ -192,9 +208,9 @@
       	   	   }
       	   	   if(th != 0){
       	   	   	  var rth = parseInt($rtc.css("height"));
-      	   	   	  var lbh = parseInt($lbc.css("height"));
+      	   	   	  var __lbh = parseInt($lbc.css("height"));
                   var rpx = rth + th + 'px';
-                  var lbpx = lbh - th + 'px';
+                  var lbpx = __lbh - th + 'px';
       	   	   	  $rtc.css("height",rpx);
       	   	   	  $rtt.css("height",rpx );
       	   	   	  $ltc.css("height",rpx);
@@ -206,51 +222,51 @@
       	   	   	  var rbpx = rbh - th + 'px';
       	   	   	  $rbc.css("max-height",rbpx);
       	   	   	  $rbt.css("max-height",rbpx );
-      	   	   	 // $rbc.find(">table").css("top",-(rth + th) + 'px');
-      	   	   	  //$lbc.find(">table").css("top",-(rth + th) + 'px');
       	   	   }
       	   	   if(rtw != 0){
       	   	   	    var _rtw = parseInt($rtc.css("width"));
-      	   	   	    $rtc.css("with",rtw + _rtw + 'px');
-      	   	   	    $rtt.css("with",rtw + _rtw + 'px' );
+      	   	   	    $rtc.css("width",rtw + _rtw + 'px');
+      	   	   	    $rtt.css("width",rtw + _rtw + 'px' );
       	   	   }
       	   	   if(lbh != 0){
       	   	   	    var _lbh = parseInt($lbc.css("height"));
-      	   	   	    $lbc.css("with",lbh + _lbh + 'px');
-      	   	   	    $lbt.css("with",lbh + _lbh + 'px' );
+      	   	   	    $lbc.css("height",lbh + _lbh + 'px');
+      	   	   	    $lbt.css("height",lbh + _lbh + 'px' );
       	   	   }
        },
       _resetRbcScrollBar: function ($allTbl) {
           var $rbc = $allTbl.find(".rightBottomContainer");
-	      var lw = parseInt($allTbl.attr("leftWidth")) + settings.adjustWHSettings.addLeftWidth;
-	      var th = parseInt($allTbl.attr("topHeight")) + settings.adjustWHSettings.addTopHeight;
-          $rbc.css("width", settings.tableMaxWidth- lw + ($rbc[0].offsetWidth - $rbc[0].clientWidth) + 'px');
-          $rbc.css("max-height", settings.tableMaxHeight -th + ($rbc[0].offsetHeight - $rbc[0].clientHeight) + "px");
+	      var lw = parseInt($allTbl.attr("leftWidth")) + settings.adjustWHSettings.addLeftWidth || 0;
+	      var th = parseInt($allTbl.attr("topHeight")) + settings.adjustWHSettings.addTopHeight || 0;
+	      var tableMaxHeight = parseInt($rbc.find("> table").data("tableMaxHeight"));
+          var tableMaxWidth = parseInt($rbc.find("> table").data("tableMaxWidth"));
+          $rbc.css("width", tableMaxWidth- lw + ($rbc[0].offsetWidth - $rbc[0].clientWidth)+4 + 'px');
+          $rbc.css("max-height", tableMaxHeight -th + ($rbc[0].offsetHeight - $rbc[0].clientHeight)+4 + "px");
       },
-      _setFixType: function () {
+      _getFixType: function ($table) {
         if (settings.fixedHeader) {
-          if (settings.fixedColumnCount > 0) {
-            settings.fixType = "full";
+          if (parseInt($table.data("fixedColumnCount")) > 0) {
+            return "full";
           } else {
-            settings.fixType =  "topbottom";
+            return "topbottom";
           }
         } else {
-          if (settings.fixedColumnCount > 0) {
-            settings.fixType = "leftright";
+          if (parseInt($table.data("fixedColumnCount")) > 0) {
+            return "leftright";
           }else{
-          	  settings.fixType = "right"
+          	return "right";
           }
         }
       },
-      _setFixedContainer: function ($allTbl) {
-      	helperMethods._setFixType();
+      _setFixedContainer: function ($allTbl,$table) {
+      	var fixType = helperMethods._getFixType($table);
         var id = String(Math.random()).substr(2);
         $allTbl.attr("id", id);
-        if (settings.fixType === "full") {
-        } else if (settings.fixType === "topbottom") {
+        if (fixType === "full") {
+        } else if (fixType === "topbottom") {
           $allTbl.find(".leftTopTd").remove();
           $allTbl.find(".leftBottomTd").remove();
-        } else if (settings.fixType === "leftright") {
+        } else if (fixType === "leftright") {
           $allTbl.find(".leftTopTd").remove();
           $allTbl.find(".rightTopTd").remove();
         }else{
@@ -265,13 +281,16 @@
         //};
       },
       _fill: function ($originalTable, $allTbl) {
+      	 var tableMaxHeight = parseInt($originalTable.data("tableMaxHeight"));
+         var tableMaxWidth = parseInt($originalTable.data("tableMaxWidth"));
+         var fixedColumnCount = parseInt($originalTable.data("fixedColumnCount"));
+
         $originalTable.css("position", "relative");
         var fullWidth = parseInt($originalTable.outerWidth());
         var fullHeight = parseInt($originalTable.outerHeight());
-        //auto set settings.fixedHeaderRowCount 
-        settings.fixedHeaderRowCount = settings.fixedHeader ? $originalTable.find("> thead > tr").length || 0 : 0;
+        var fixedHeaderRowCount = settings.fixedHeader ? $originalTable.find("> thead > tr").length || 0 : 0;
         var leftWidth = 0,topHeight = 0;
-        for (var i = 1; i <= settings.fixedColumnCount; i++) {
+        for (var i = 1; i <= fixedColumnCount; i++) {
         	var $cell = $originalTable
               .find(">thead >tr:nth-child(1) > td:nth-child(" + i + ")").length > 0 ? $originalTable
               .find(">thead >tr:nth-child(1) > td:nth-child(" + i + ")") : $originalTable.find(">thead >tr:nth-child(1) > th:nth-child(" + i + ")")
@@ -279,7 +298,7 @@
 	            $cell.outerWidth(true)
 	          );
         }
-        for (var j = 1; j <= settings.fixedHeaderRowCount; j++) {
+        for (var j = 1; j <= fixedHeaderRowCount; j++) {
           topHeight += parseInt(
             $originalTable.find(">thead >tr:nth-child(" + j + ")").outerHeight(true)
           );
@@ -300,31 +319,30 @@
               $ltc.css("width", lwpx).css("height", topHeight + "px").html($originalTable.clone());
             }
 
-            $lbt.css("max-height", settings.tableMaxHeight -topHeight + "px");
-            $lbc.css("max-height", settings.tableMaxHeight -topHeight + "px");
+            $lbt.css("max-height", tableMaxHeight -topHeight + "px");
+            $lbc.css("max-height", tableMaxHeight -topHeight + "px");
           
-            for (var j = 1; j <= settings.fixedHeaderRowCount; j++) {
-	            $lbc.find("> table >thead >tr:nth-child(" + j + ")").remove();
-	        }
+            if(settings.fixedHeader)
+	            $lbc.find("> table >thead >tr").remove();
         }
-         var wpx =  settings.tableMaxWidth-leftWidth + "px";
+         var wpx =  tableMaxWidth-leftWidth + "px";
          $rbc.html($originalTable.clone(true));
-         $rbc.css("width", settings.tableMaxWidth-leftWidth + 'px');
+         $rbc.css("width", tableMaxWidth-leftWidth + 'px');
          $rbt.css("width", wpx);
-         $rbc.css("max-height", settings.tableMaxHeight -topHeight + "px");
-
+         $rbc.css("max-height", tableMaxHeight -topHeight + "px");
+         
+         $rtc.find(" > table").css("left", -leftWidth + "px");
+         $rtt.css("width", wpx);$rtc.css("width", wpx);
+         $rbc.find(" > table").css("left", -leftWidth + "px");
         if (topHeight > 0) {
-            $rtc.css("height", topHeight + "px").css("width", fullWidth - leftWidth + "px").html($originalTable.clone());
-            $rtc.find(" > table").css("left", -leftWidth + "px");
-            $rtt.css("width", wpx);$rtc.css("width", wpx);
-            $rbc.find(" > table").css("left", -leftWidth + "px");//.css("top", -topHeight + "px");
-             for (var j = 1; j <= settings.fixedHeaderRowCount; j++) {
-	            $rbc.find("> table >thead >tr:nth-child(" + j + ")").remove();
-	        }
-            $rbt.css("max-height", settings.tableMaxHeight -topHeight + "px");
+            //$rtc.css("height", topHeight + "px").css("width", fullWidth - leftWidth + "px").html($originalTable.clone());
+            $rtc.css("height", topHeight + "px").html($originalTable.clone())
+            $rbt.css("max-height", tableMaxHeight -topHeight + "px");
+            if(settings.fixedHeader)
+	           $rbc.find("> table >thead >tr").remove();
         }
 
-          $allTbl.css("width", settings.tableMaxWidth + "px");
+          $allTbl.css("width", tableMaxWidth + "px");
         
         if($rbc.length > 0){
              $rbc.scroll(function(e) { 
