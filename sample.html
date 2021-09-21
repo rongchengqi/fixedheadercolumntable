@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="jquery340.js" ></script>
+<script src="jquery.fixedheadercolumntable.js" ></script>
+
+<style>
+body{
+ width:960px;
+ margin: 0 auto;
+ text-align:center;
+}
+table.desc {
+    text-align:left;
+    border-width: 1px;
+}
+
+table.tbl {
+    border-width: 0px;
+    margin: 0px;
+    border-collapse: collapse;
+    margin: 0;
+    outline-style: none;
+    font-size: 0.9em;
+    background-color: #fff;
+}
+table.tbl  caption{
+	padding-bottom:5px;
+	font:bold 1.4em;
+	text-align:left;
+}
+
+table.tbl thead{
+   background-color : #DBEAF9;
+}
+table.tbl  th{
+
+}
+table.tbl td{
+border-collapse: collapse;
+    padding: 2px 4px;
+    word-wrap: break-word;
+    border: 1px solid #CCCCCC;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+table.desc td{
+border-collapse: collapse;
+    padding: 2px 4px;
+    word-wrap: break-word;
+    border: 1px solid #CCCCCC;
+    border-top-width: 0px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    overflow: hidden;
+    word-wrap: break-word;
+ }
+.c{
+   border : 10px solid yellow;
+   display : block;
+   width : 100%;
+}
+</style>
+<h1>jquery.fixedheadercolumntable</h1>
+	<h3>固定&#22836;</h3>
+	<p>
+	  一行
+	</p>
+<table class='tbl fixheader'>
+<thead>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+</tbody>
+</table>
+	<p>
+	  多行
+	</p>
+<table class='tbl fixheader'>
+<thead>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+</tbody>
+</table>
+	<h3>固定列</h3>
+	<p>
+	  &#28378;&#21160;&#22836;和体
+	</p>
+<table class='tbl fixcol1'>
+<thead>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+</tbody>
+</table>
+
+	<p>
+	  只固定列
+	</p>
+<table class='tbl fixcol2'>
+<thead>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+</tbody>
+</table>
+<h3>固定&#22836;和列</h3>
+	<p>
+	  
+	</p>
+<table class='tbl fix'>
+<thead>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+<tr>
+  <th>100</th>
+  <th>100</th>
+  <th>100</th>
+    <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+     <th>100</th>
+   <th>100</th>
+  <th>100</th>
+    <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+   <th>100</th>
+   <th>100</th>
+  <th>100</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+<tr>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+    <td>100</td>
+  <td>200</td>
+  <td>300</td>
+   <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td> 
+  <td>100</td>
+  <td>200</td>
+  <td>300</td>
+</tr>
+</tbody>
+</table>
+<script>
+$(document).ready(function() {
+ $("table.fixheader").fixedheadercolumntable({tableMaxHeight:100});
+  $("table.fixcol1").fixedheadercolumntable({fixedColumnCount:4,tableMaxHeight:100,tableMaxWidth:850,fixedHeader:false});
+  $("table.fixcol2").fixedheadercolumntable({fixedColumnCount:4,tableMaxWidth:800,fixedHeader:false});
+  $("table.fix").fixedheadercolumntable({fixedColumnCount:4,tableMaxHeight:100,tableMaxWidth:850});
+
+});
+</script>
+<h3>参数&#35828;明</h3>
+	<p>
+	  
+	</p>
+<table class='tbl desc'><thead><tr><th>	参数	</th><th width="500">	描述	</th><th>	参数&#20540;&#31867;型	</th><th>	默&#35748;&#20540;	</th></tr></thead>
+<tbody><tr><td>	fixedColumnCount	</td><td>	&#35774;置想要固定的列数 插件会自&#21160;&#26816;&#27979;&#35774;置&#20540;，当&#20540;大于表格&#24635;列数&#26102;，此&#20540;会被重置&#20026;0	</td><td>	数&#20540;	</td><td>	0	</td></tr>
+<tr><td>	tableMaxHeight	</td><td>	&#35774;置表格最大高度 插件会自&#21160;&#26816;&#27979;&#35774;置&#20540;，当&#20540;大于表格&#24635;高度&#26102;，此&#20540;会被重置&#20026;表格&#24635;高度	</td><td>	数&#20540;	</td><td>	0	</td></tr>
+<tr><td>	tableMaxWidth	</td><td>	&#35774;置表格最大&#23485;度 插件会自&#21160;&#26816;&#27979;&#35774;置&#20540;，当&#20540;大于表格&#24635;&#23485;度&#26102;，此&#20540;会被重置&#20026;表格&#24635;&#23485;度	</td><td>	数&#20540;	</td><td>	0	</td></tr>
+<tr><td>	fixedHeader	</td><td>	&#35774;置是否固定&#22836;，true : 固定（插件会自&#21160;&#26816;&#27979;thead里的行数并&#36827;行固定）	</td><td>	布&#23572;	</td><td>	true	</td></tr>
+<tr><td>	adjustWHSettings	</td><td>	&#35774;置各&#31181;高度的&#35843;整&#20540;（当表格&#26679;式&#22797;&#26434;多&#26679;&#26102;，若出&#29616;各区域&#23485;高不理想&#26102;候，可以指定区域微&#35843;整）	</td><td>	&#23545;象	</td><td>	-	</td></tr>
+<tr><td>	addLeftWidth	</td><td>	&#35774;置固定列区域&#23485;度添加&#20540;	</td><td>	数&#20540;	</td><td>	0	</td></tr>
+<tr><td>	addTopHeight	</td><td>	&#35774;置固定&#22836;区域高度添加&#20540;	</td><td>	数&#20540;	</td><td>	0	</td></tr>
+<tr><td>	addRightTopWidth	</td><td>	&#35774;置固定后右上区域&#23485;度添加&#20540;	</td><td>	数&#20540;	</td><td>	0	</td></tr>
+<tr><td>	addLeftBottomHeight	</td><td>	&#35774;置固定后左下区域&#23485;度添加&#20540;	</td><td>	数&#20540;	</td><td>	0	</td></tr>
+<tr><td>	submitEreas	</td><td>	当表格在form&#38388;，内有表&#21333;元素&#26102;，&#35774;置想要提交的区域	</td><td>	&#23545;象	</td><td>	-	</td></tr>
+<tr><td>	leftTop	</td><td>	&#35774;置左上&#20026;提交区域	</td><td>	布&#23572;	</td><td>	false	</td></tr>
+<tr><td>	leftBottom	</td><td>	&#35774;置左下&#20026;提交区域	</td><td>	布&#23572;	</td><td>	false	</td></tr>
+<tr><td>	rightTop	</td><td>	&#35774;置右上&#20026;提交区域	</td><td>	布&#23572;	</td><td>	false	</td></tr>
+<tr><td>	rightBottom	</td><td>	&#35774;置右下&#20026;提交区域	</td><td>	布&#23572;	</td><td>	true	</td></tr>
+<tr><td>	submitSelector	</td><td>	&#35774;置表&#21333;提交的目&#26631;元素名（，分隔多个）	</td><td>	字符串	</td><td>	"a,input,select,textarea"	</td></tr></tbody></table>
+
+
+<h3>&#20320;的表格需要包含thead和tbody，然后象下&#36793;一&#26679;&#31616;&#21333;&#35843;用即可,<br>当然&#21035;忘&#35760;了先引入jquery&#24211;</h3>
+	<p style='text-align:left'>
+	  &lt;script&gt;<br>
+$(<font color=red>document</font>).ready(<font color=blue>function</font>() {<br>
+ $(<font color=green>"table"</font>).fixedheadercolumntable();<br>
+
+});<br>
+&lt;/script&gt;<br>
+	</p>
+
+<h3>made by 109033606@qq.com</h3>
+
+</body>
+</html>
