@@ -7,7 +7,7 @@
     var defaults = {
       fixedColumnCount  : 0,// if this is not be set, will not fix column
       tableMaxHeight    : 0,
-      tableMaxWidth     : 0, //this will be work only when responsive is false.
+      tableMaxWidth     : 0, 
       fixedHeader       : true, // when true,will auto get fixed header row count from table header trs.
       adjustWHSettings  : {
       	   addLeftWidth        :0,
@@ -39,7 +39,7 @@
       init: function (options) {
         settings = $.extend({}, defaults, options);
         this.each(function () {
-          var $table = $(this); // reference the jQuery version of the current DOM element
+          var $table = $(this); 
           $table.data("tableMaxHeight",settings.tableMaxHeight);
           $table.data("tableMaxWidth",settings.tableMaxWidth);
           $table.data("fixedColumnCount",settings.fixedColumnCount);
